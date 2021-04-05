@@ -1,0 +1,34 @@
+{
+  "name": "translate",
+  "package_version": 2,
+  "version": "1.0.0",
+  "description": "翻译插件",
+  "author": "xu_yanfeng",
+  "main": "browser.js",
+  "contributions": {
+    "menu": [
+      {
+        "path": "小王子",
+        "label": "翻译",
+        "message": "open-panel"
+      }
+    ],
+    "messages": {
+      "open-panel": {
+        "methods": [
+          "open_panel"
+        ]
+      }
+    },
+    "shortcuts": [
+      {
+        "message": "open-panel",
+        "win": "shift+1",
+        "mac": "shift+1"
+      }
+    ]
+  },
+  "dependencies": {
+    "bing-translate-api": "^1.1.1"
+  }
+}
