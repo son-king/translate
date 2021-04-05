@@ -51,6 +51,23 @@ new Vue({
         unFixed () {
             this.fixed = false;
             Electron.ipcRenderer.send('un-fixed-window');
+        },
+        onChangeLanguage () {
+            let tmp = this.from;
+            this.from = this.to;
+            this.to = tmp;
+        },
+        getFromLanguage () {
+            return this._getLanguage(this.from)
+        },
+        getToLanguage () {
+            return this._getLanguage(this.to);
+        },
+        _getLanguage (lan) {
+            let map = {};
+            map[zh] = '中文';
+            map[en] = '英文';
+            return map[lan] || '未知';
         }
     }
 })

@@ -68,16 +68,48 @@
             width: 20px;
             height: 20px;
         }
+
+        .menu {
+            position: relative;
+            right: 10px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .change {
+            cursor: pointer;
+            width: 30px;
+            height: 20px;
+        }
+
+        .tool {
+            flex: 1;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+        }
     </style>
     <script src="vue.min.js"></script>
 </head>
 <body style="width: 100%;height: 100%;">
 <div id="app">
     <div class="title">
-        <div style="flex:1;"></div>
-        <img v-if="fixed" class="fixed" src="./fixed.svg" @click="unFixed" alt="">
-        <img v-if="!fixed" class="un-fixed" src="./un-fixed.svg" @click="onFixed" alt="">
-        <img class="close" @click="closePanel" alt="" src="./close.svg">
+        <div class="tool">
+            <div>
+                {{getFromLanguage()}}
+            </div>
+            <img class="change" src="./change.svg" @click="onChangeLanguage">
+            <div>
+                {{getToLanguage()}}
+            </div>
+        </div>
+        <div class="menu">
+            <img v-if="fixed" class="fixed" src="./fixed.svg" @click="unFixed" alt="">
+            <img v-if="!fixed" class="un-fixed" src="./un-fixed.svg" @click="onFixed" alt="">
+            <img class="close" @click="closePanel" alt="" src="./close.svg">
+        </div>
     </div>
 
     <div class="content">
