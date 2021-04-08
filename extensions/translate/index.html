@@ -10,88 +10,10 @@
             width: 100%;
             height: 100%;
         }
-
-        .title {
-            width: 100%;
-            height: 30px;
-            -webkit-app-region: drag;
-            background-color: #b7cfee;
-            -webkit-user-select: none;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-        }
-
-        .content {
-            flex: 1;
-            display: flex;
-            flex-direction: row;
-        }
-
-        #app {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            height: 100%;
-        }
-
-        textarea {
-            width: 100%;
-            height: 100%;
-            outline: none;
-            border: 0;
-            padding: 0;
-            margin: 0;
-        }
-
-        .close {
-            width: 25px;
-            height: 25px;
-            border: 2px solid transparent;
-            border-radius: 15px;
-        }
-
-        .close:hover {
-            cursor: pointer;
-            border: 2px solid gray;
-            border-radius: 15px;
-        }
-
-        .fixed {
-            cursor: pointer;
-            width: 20px;
-            height: 20px;
-        }
-
-        .un-fixed {
-            cursor: pointer;
-            width: 20px;
-            height: 20px;
-        }
-
-        .menu {
-            position: relative;
-            right: 10px;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-        }
-
-        .change {
-            cursor: pointer;
-            width: 30px;
-            height: 20px;
-        }
-
-        .tool {
-            flex: 1;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: center;
-        }
     </style>
     <script src="vue.min.js"></script>
+    <link rel="stylesheet" href="loading.css">
+    <link rel="stylesheet" href="index.css">
 </head>
 <body style="width: 100%;height: 100%;">
 <div id="app">
@@ -114,10 +36,36 @@
 
     <div class="content">
         <label style="flex:1;">
-            <textarea v-model="word" style="text-align: left; resize:none;" autofocus
+            <textarea v-model="word"
+                      placeholder="请输入要翻译的文本..."
+                      ref="word"
+                      class="word"
+                      style="background-color: #474747;overflow: scroll;"
+                      autofocus
                       @input="onInputChange"></textarea>
         </label>
-        <div style="flex:1;background-color: #999999;">{{translate}}</div>
+        <div style="height: 100%;width: 2px;background-color: #666666;">
+
+        </div>
+        <div class="right">
+            <div v-if="loading" style="width:100%;height: 100%; display: flex;flex-direction: row;align-items: center;">
+                <div class="loading">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            <div class="word" @click="onClickTranslateResult"
+                 v-if="!loading"
+                 style="cursor: pointer;color: lawngreen;">
+                {{translate}}
+            </div>
+        </div>
+    </div>
+    <div class="tips">
+        {{tips}}
     </div>
 </div>
 

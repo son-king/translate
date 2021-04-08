@@ -1,5 +1,6 @@
 let win = null;
 const Electron = require('electron')
+let config = require('./config')
 
 function closeWin () {
     if (win) {
@@ -23,11 +24,22 @@ exports.load = () => {
             if (win) {
                 win.setAlwaysOnTop(false);
             }
+        },
+        "save-from-to": (event, from, to) => {
+            config.setData('from', from);
+            config.setData('to', to);
+            config.save();
+        },
+        "get-config": (event) => {
+            if (event.sender) {
+                event.sender.send("get-config", config.data)
+            }
         }
     }
     for (let key in msg) {
         Electron.ipcMain.on(key, msg[key]);
     }
+    config.init();
 }
 
 exports.unload = () => {
@@ -42,14 +54,30 @@ exports.methods = {
         }
         const Path = require('path')
         const Electron = require('electron');
-        win = new Electron.BrowserWindow({
-            width: 800,
-            height: 600,
+        let options = {
+            width: 300,
+            height: 100,
+            minWidth: 300,
+            minHeight: 100,
             frame: false,
             webPreferences: {
                 nodeIntegration: true,
             }
-        });
+        };
+        if (config.data.hasOwnProperty('width')) {
+            options.width = config.data.width;
+        }
+        if (config.data.hasOwnProperty('height')) {
+            options.height = config.data.height;
+        }
+        // if (config.data.hasOwnProperty('x')) {
+        //     options.x = config.data.x;
+        // }
+        // if (config.data.hasOwnProperty('y')) {
+        //     options.y = config.data.y;
+        // }
+
+        win = new Electron.BrowserWindow(options);
         win.setAlwaysOnTop(true);
         let html = Path.join(__dirname, 'index.html');
         win.loadURL(`file://${html}`);
@@ -57,7 +85,13 @@ exports.methods = {
             win = null;
         });
         win.on('blur', () => {
-            // closeWin();
+            closeWin();
+        })
+        win.on('resize', () => {
+            let size = win.getSize();
+            config.setData('width', size[0])
+            config.setData('height', size[1]);
+            config.save();
         })
         win.webContents.openDevTools();
         win.show();
