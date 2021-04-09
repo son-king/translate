@@ -1,50 +1,50 @@
 let win = null;
-const Electron = require('electron')
-let config = require('./config')
+const Electron = require('electron');
+let config = require('./config');
 
 function closeWin () {
     if (win) {
-        win.close()
+        win.close();
         win = null;
     }
 }
 
 exports.load = () => {
-    console.log('load')
+    console.log('load');
     let msg = {
         'close-window': (event, arg) => {
             closeWin();
         },
-        "fixed-window": () => {
+        'fixed-window': () => {
             if (win) {
                 win.setAlwaysOnTop(true);
             }
         },
-        "un-fixed-window": () => {
+        'un-fixed-window': () => {
             if (win) {
                 win.setAlwaysOnTop(false);
             }
         },
-        "save-from-to": (event, from, to) => {
+        'save-from-to': (event, from, to) => {
             config.setData('from', from);
             config.setData('to', to);
             config.save();
         },
-        "get-config": (event) => {
+        'get-config': (event) => {
             if (event.sender) {
-                event.sender.send("get-config", config.data)
+                event.sender.send('get-config', config.data);
             }
         }
-    }
+    };
     for (let key in msg) {
         Electron.ipcMain.on(key, msg[key]);
     }
     config.init();
-}
+};
 
 exports.unload = () => {
-    console.log('unload')
-}
+    console.log('unload');
+};
 exports.methods = {
     open_panel () {
         if (win) {
@@ -52,7 +52,7 @@ exports.methods = {
             win.focus();
             return;
         }
-        const Path = require('path')
+        const Path = require('path');
         const Electron = require('electron');
         let options = {
             width: 300,
@@ -88,14 +88,14 @@ exports.methods = {
             closeWin();
             // if (!win.isAlwaysOnTop()) {
             // }
-        })
+        });
         win.on('resize', () => {
             let size = win.getSize();
-            config.setData('width', size[0])
+            config.setData('width', size[0]);
             config.setData('height', size[1]);
             config.save();
-        })
+        });
         // win.webContents.openDevTools();
         win.show();
     }
-}
+};
