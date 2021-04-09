@@ -60,6 +60,7 @@ exports.methods = {
             minWidth: 300,
             minHeight: 100,
             frame: false,
+            transparent: true,
             webPreferences: {
                 nodeIntegration: true,
             }
@@ -95,7 +96,7 @@ exports.methods = {
             config.setData('height', size[1]);
             config.save();
         });
-        // win.webContents.openDevTools();
+        win.webContents.openDevTools();
         win.show();
     }
 };

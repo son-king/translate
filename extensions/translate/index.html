@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" style="width: 100%;height: 100%">
+<html lang="en" style="width: 100%;height: 100%;background-color: transparent;">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -15,22 +15,22 @@
     <link rel="stylesheet" href="loading.css">
     <link rel="stylesheet" href="index.css">
 </head>
-<body style="width: 100%;height: 100%;">
+<body style="width: 100%;height: 100%;background-color: transparent;">
 <div id="app">
     <div class="title">
         <div class="tool">
             <div>
                 {{getFromLanguage()}}
             </div>
-            <img class="change" src="./change.svg" @click="onChangeLanguage">
+            <img class="change no-drag" src="./change.svg" @click="onChangeLanguage">
             <div>
                 {{getToLanguage()}}
             </div>
         </div>
         <div class="menu">
-            <img v-if="fixed" class="fixed" src="./fixed.svg" @click="unFixed" alt="">
-            <img v-if="!fixed" class="un-fixed" src="./un-fixed.svg" @click="onFixed" alt="">
-            <img class="close" @click="closePanel" alt="" src="./close.svg">
+            <img v-if="fixed" class="fixed no-drag" src="./fixed.svg" @click="unFixed" alt="">
+            <img v-if="!fixed" class="un-fixed no-drag" src="./un-fixed.svg" @click="onFixed" alt="">
+            <img class="close no-drag" @click="closePanel" alt="" src="./close.svg">
         </div>
     </div>
 
