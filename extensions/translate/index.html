@@ -28,6 +28,7 @@
             </div>
         </div>
         <div class="menu">
+            <img class="doc no-drag" @click="onHelp" src="./help.svg">
             <img v-if="fixed" class="fixed no-drag" src="./fixed.svg" @click="unFixed" alt="">
             <img v-if="!fixed" class="un-fixed no-drag" src="./un-fixed.svg" @click="onFixed" alt="">
             <img class="close no-drag" @click="closePanel" alt="" src="./close.svg">

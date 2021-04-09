@@ -56,6 +56,12 @@ textarea {
     border-radius: 7px;
 }
 
+.doc {
+    cursor: pointer;
+    width: 15px;
+    height: 15px;
+}
+
 .fixed {
     display: none;
     cursor: pointer;

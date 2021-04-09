@@ -58,6 +58,10 @@ new Vue({
                 }
             }, 400);
         },
+        onHelp(){
+            let url = "http://www.baidu.com";
+            Electron.shell.openExternal(url);
+        },
         onTranslate () {
             const { translate } = require('bing-translate-api');
             this.loading = true;
