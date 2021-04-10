@@ -59,7 +59,7 @@ new Vue({
             }, 400);
         },
         onHelp(){
-            let url = "http://www.baidu.com";
+            let url = "http://tidys.gitee.io/doc/#/docs/translate/index";
             Electron.shell.openExternal(url);
         },
         onTranslate () {
