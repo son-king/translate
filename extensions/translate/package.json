@@ -30,6 +30,7 @@
     ]
   },
   "dependencies": {
-    "bing-translate-api": "^1.1.1"
+    "bing-translate-api": "^1.1.1",
+    "baidu-translate-api": "^0.4.3"
   }
 }
