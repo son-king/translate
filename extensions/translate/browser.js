@@ -86,9 +86,7 @@ exports.methods = {
             win = null;
         });
         win.on('blur', () => {
-            closeWin();
-            // if (!win.isAlwaysOnTop()) {
-            // }
+            // closeWin();
         });
         win.on('resize', () => {
             let size = win.getSize();
