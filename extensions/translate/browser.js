@@ -86,9 +86,7 @@ exports.methods = {
             win = null;
         });
         win.on('blur', () => {
-            closeWin();
-            // if (!win.isAlwaysOnTop()) {
-            // }
+            // closeWin();
         });
         win.on('resize', () => {
             let size = win.getSize();
@@ -96,7 +94,10 @@ exports.methods = {
             config.setData('height', size[1]);
             config.save();
         });
-        win.webContents.openDevTools();
+        const { dev } = require('./package.json')
+        if (dev) {
+            win.webContents.openDevTools();
+        }
         win.show();
     }
 };

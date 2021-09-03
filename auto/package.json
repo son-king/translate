@@ -9,6 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "cc-plugin-packer": "^1.0.1"
+    "cc-plugin-packer": "^1.0.2"
   }
 }
